@@ -19,6 +19,8 @@ An application to demonstrate code.
 Contents of `dev_deploy.sh`
 
 * Install composer dependencies `composer install`
+* Copy `.env.example` to `.env`
+* Generate key `php artisan key:generate --ansi`
 * Give permissions:
 ```
 chgrp -R www-data storage bootstrap/cache
