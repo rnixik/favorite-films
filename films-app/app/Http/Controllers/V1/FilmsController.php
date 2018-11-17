@@ -22,4 +22,9 @@ class FilmsController extends Controller
 
         return response()->json($film, 201);
     }
+
+    public function getSuggestions(Request $request)
+    {
+        return Film::getNonFavoriteQuery($request->user()->id)->paginate(10);
+    }
 }

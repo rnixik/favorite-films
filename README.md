@@ -40,6 +40,13 @@ Run
 docker-compose exec auth-app vendor/bin/phpunit
 ```
 
+#### Films-app
+
+Run
+```
+docker-compose exec films-app vendor/bin/phpunit
+```
+
 ### Docs
 
 Swagger on [http://127.0.0.1:8003](http://127.0.0.1:8003) by default.

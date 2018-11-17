@@ -19,3 +19,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/films', 'FilmsController@store');
 Route::post('/favorites', 'FavoritesController@store');
+Route::get('/films/suggestions', 'FilmsController@getSuggestions');

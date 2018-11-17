@@ -1,250 +1,306 @@
 {
-   "swagger":"2.0",
-   "info":{
-      "description":"List of favorite films for a user",
-      "version":"1.0.0",
-      "title":"Favorite films"
-   },
-   "host": "localhost:8002",
-   "basePath":"/api/v1",
-   "paths":{
-      "/films":{
-         "post":{
-            "tags":[
-               "film"
-            ],
-            "summary":"Add a new film to the store",
-            "description":"",
-            "consumes":[
-               "application/json",
-            ],
-            "produces":[
-               "application/json"
-            ],
-            "parameters":[
-               {
-                  "in":"body",
-                  "name":"body",
-                  "description":"Film object that needs to be added to the store",
-                  "required":true,
-                  "schema":{
-                     "type":"object",
-					 "required":[
-						"title",
-						"description",
-						"release_year"
-					 ],
-					 "properties":{
-						"title":{
-						   "type":"string",
-						   "example":"Death Note"
-						},
-						"description":{
-						   "type":"string",
-						   "example":"A film based on a anime"
-						},
-						"release_year":{
-						   "type":"integer",
-						   "example":2013
-						}
-					 }
-                  }
-               }
-            ],
-            "responses":{
-			   "201":{
-                  "description":"Created",
-                  "schema":{
-                     "$ref":"#/definitions/Film"
-                  }
-               },
-               "401":{
-                  "description":"Need authentication"
-               },
-               "422":{
-                  "description":"Invalid input"
-               }
-            },
-            "security":[
-               {
-                  "auth_app": [],
-               }
-            ]
-         }
-      },
-      "/favorites":{
-         "post":{
-            "tags":[
-               "favorite"
-            ],
-            "summary":"Add a film to the user's favorite collection",
-            "description":"",
-            "consumes":[
-               "application/json",
-            ],
-            "produces":[
-               "application/json"
-            ],
-            "parameters":[
-               {
-                  "in":"body",
-                  "name":"body",
-                  "description":"Film ID which sould be added",
-                  "required":true,
-                  "schema":{
-                     "type":"object",
-                     "required":[
-                        "film_id"
-                     ],
-                     "properties":{
-                        "film_id":{
-                           "type":"integer",
-                           "example":3
-                        }
-                     }
-                  }
-               }
-            ],
-            "responses":{
-               "201":{
-                  "description":"Added",
-                  "schema":{
-                     "$ref":"#/definitions/Favorite"
-                  }
-               },
-               "200":{
-                  "description":"Already in collection",
-                  "schema":{
-                     "$ref":"#/definitions/Favorite"
-                  }
-               },
-               "401":{
-                  "description":"Need authentication"
-               },
-               "422":{
-                  "description":"Invalid input"
-               }
-            },
-            "security":[
-               {
-                  "auth_app": [],
-               }
-            ]
-         }
-      },
-      "/pet/findByStatus":{
-         "get":{
-            "tags":[
-               "pet"
-            ],
-            "summary":"Finds Pets by status",
-            "description":"Multiple status values can be provided with comma separated strings",
-            "operationId":"findPetsByStatus",
-            "produces":[
-               "application/xml",
-               "application/json"
-            ],
-            "parameters":[
-               {
-                  "name":"status",
-                  "in":"query",
-                  "description":"Status values that need to be considered for filter",
-                  "required":true,
-                  "type":"array",
-                  "items":{
-                     "type":"string",
-                     "enum":[
-                        "available",
-                        "pending",
-                        "sold"
-                     ],
-                     "default":"available"
+  "openapi": "3.0.0",
+  "info": {
+    "description": "List of favorite films for a user",
+    "version": "1.0.0",
+    "title": "Favorite films"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8002/api/v1",
+      "description": "Local environment with docker-compose"
+    }
+  ],
+  "paths": {
+    "/films": {
+      "post": {
+        "tags": [
+          "films"
+        ],
+        "summary": "Add a new film to the store",
+        "requestBody": {
+          "description": "Film object that needs to be added to the store",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "description",
+                  "release_year"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Death Note"
                   },
-                  "collectionFormat":"multi"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"successful operation",
-               },
-               "400":{
-                  "description":"Invalid status value"
-               }
+                  "description": {
+                    "type": "string",
+                    "example": "A film based on a story"
+                  },
+                  "release_year": {
+                    "type": "integer",
+                    "example": 2013
+                  }
+                }
+              }
             }
-         }
-      }
-   },
-   "securityDefinitions":{
-      "auth_app":{
-         "type":"oauth2",
-         "flow":"password",
-         "tokenUrl":"http://localhost:8001/oauth/token",
-         "scopes":{}
-      }
-   },
-   "definitions":{
-      "Film":{
-         "type":"object",
-         "required":[
-            "title",
-            "description",
-            "release_year"
-         ],
-         "properties":{
-            "id":{
-               "type":"integer",
-               "format":"int64",
-               "example":123
-            },
-            "title":{
-               "type":"string",
-               "example":"Death Note"
-            },
-            "description":{
-               "type":"string",
-               "example":"A film based on a anime"
-            },
-            "release_year":{
-               "type":"integer",
-               "format":"int32",
-               "example":2013
-            },
-            "created_at":{
-               "type":"string",
-               "example":"2013-12-27 23:59:59"
-            },
-            "created_by_user_id":{
-               "type":"integer",
-               "example":333
-            },
-         }
-      },
-      "Favorite":{
-         "type":"object",
-         "required":[
-            "id",
-            "user_id",
-            "film_id"
-         ],
-         "properties":{
-            "id":{
-               "type":"integer",
-               "format":"int64",
-               "example":123
-            },
-            "title":{
-               "user_id":"integer",
-               "example":333
-            },
-            "film_id":{
-               "type":"integer",
-               "example":5
-            },
-            "created_at":{
-               "type":"string",
-               "example":"2013-12-27 23:59:59"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Film"
+                }
+              }
             }
-         }
-      },
-   }
+          },
+          "401": {
+            "description": "Need authentication"
+          },
+          "422": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "auth_app": []
+          }
+        ]
+      }
+    },
+    "/favorites": {
+      "post": {
+        "tags": [
+          "favorite"
+        ],
+        "summary": "Add a film to the user's favorite collection",
+        "requestBody": {
+          "description": "Film ID which should be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "film_id"
+                ],
+                "properties": {
+                  "film_id": {
+                    "type": "integer",
+                    "example": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Favorite"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Already in collection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Favorite"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need authentication"
+          },
+          "422": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "auth_app": []
+          }
+        ]
+      }
+    },
+    "/films/suggestions": {
+      "get": {
+        "tags": [
+          "films"
+        ],
+        "operationId": "getFilmsSuggestions",
+        "summary": "Get list of films which are not in favorite of current user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "current_page": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "data": {
+                      "$ref":"#/definitions/Films"
+                    },
+                    "first_page_url": {
+                      "type": "string",
+                      "example": "http://127.0.0.1:8002/api/v1/films/suggestions?page=1"
+                    },
+                    "last_page_url": {
+                      "type": "string",
+                      "example": "http://127.0.0.1:8002/api/v1/films/suggestions?page=4"
+                    },
+                    "prev_page_url": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "next_page_url": {
+                      "type": "string",
+                      "example": "http://127.0.0.1:8002/api/v1/films/suggestions?page=2"
+                    },
+                    "from": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "last_page": {
+                      "type": "integer",
+                      "example": 4
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "to": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": 40
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need authentication"
+          }
+        },
+        "security": [
+          {
+            "auth_app": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "auth_app": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "tokenUrl": "http://localhost:8001/oauth/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Film": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "release_year"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 123
+        },
+        "title": {
+          "type": "string",
+          "example": "Death Note"
+        },
+        "description": {
+          "type": "string",
+          "example": "A film based on a story"
+        },
+        "release_year": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2013
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2013-12-27 23:59:59"
+        },
+        "created_by_user_id": {
+          "type": "integer",
+          "example": 333
+        }
+      }
+    },
+    "Favorite": {
+      "type": "object",
+      "required": [
+        "id",
+        "user_id",
+        "film_id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 123
+        },
+        "title": {
+          "user_id": "integer",
+          "example": 333
+        },
+        "film_id": {
+          "type": "integer",
+          "example": 5
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2013-12-27 23:59:59"
+        }
+      }
+    },
+    "Films": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Film"
+      }
+    }
+  }
 }
