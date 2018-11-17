@@ -1,20 +1,43 @@
 version: "3.2"
 services:
   auth-app:
+    build:
+      args:
+        WEB_USER_ID: 1000 #local user id
+        WEB_USER_NAME: developer #any user name
     environment:
-      XDEBUG_CONFIG: remote_host=192.168.1.232 # your ip
+      XDEBUG_CONFIG: remote_host=192.168.1.232 #ip of host for remote xdebug
     volumes:
-      - ./auth-app/php_dev.ini:/usr/local/etc/php/php.ini
+    - ./auth-app/php_dev.ini:/usr/local/etc/php/php.ini #enable xdebug
   auth-nginx:
     build:
       args:
-        WEB_USER_ID: 1000 # result of `id -u`
+        WEB_USER_ID: 1000
         WEB_USER_NAME: developer
     ports:
-      - 8001:80
+    - 8001:80
   auth-db:
     ports:
-      - 35432:5432
+    - 35432:5432
+  films-app:
+    build:
+      args:
+        WEB_USER_ID: 1000
+        WEB_USER_NAME: developer
+    environment:
+      XDEBUG_CONFIG: remote_host=192.168.1.232
+    volumes:
+    - ./films-app/php_dev.ini:/usr/local/etc/php/php.ini
+  films-nginx:
+    build:
+      args:
+        WEB_USER_ID: 1000
+        WEB_USER_NAME: developer
+    ports:
+    - 8002:80
+  films-db:
+    ports:
+    - 45432:5432
   swagger:
     ports:
     - 8003:8080
