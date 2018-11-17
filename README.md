@@ -13,7 +13,7 @@ An application to demonstrate code.
 1. Copy `docker-compose.override.example.yml` to `docker-compose.override.yml`
 2. Edit `docker-compose.override.yml` for your preferences.
 3. Run `docker-compose up -d --build`
-4. Wait services and run `dev_deploy.sh`
+4. Wait for services and run `dev_deploy.sh`
 
 #### In case something went wrong
 
