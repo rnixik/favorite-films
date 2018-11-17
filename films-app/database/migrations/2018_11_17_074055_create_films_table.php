@@ -14,11 +14,11 @@ class CreateFilmsTable extends Migration
     public function up()
     {
         Schema::create('films', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedBigInteger('id', true);
             $table->string('title');
             $table->text('description');
             $table->tinyInteger('release_year');
-            $table->bigInteger('created_by_user_id')->nullable();
+            $table->unsignedBigInteger('created_by_user_id')->nullable();
             $table->timestamps();
         });
     }

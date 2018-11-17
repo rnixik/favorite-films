@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class FilmsTest extends TestCase
 {
     use DatabaseTransactions;
     use ApiRequesterTrait;
