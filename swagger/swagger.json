@@ -282,8 +282,8 @@
           "format": "int64",
           "example": 123
         },
-        "title": {
-          "user_id": "integer",
+        "user_id": {
+          "type": "integer",
           "example": 333
         },
         "film_id": {
