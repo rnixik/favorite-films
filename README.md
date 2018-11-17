@@ -62,7 +62,7 @@ You need `client_id` and `client_secret`. It can be found:
 
 Also you need email (as `username`) and `password` for a user. 
 Email can be found in table `users` of `auth-db`.
-Password is `secret1` for every seed.
+Password for every seed is `secret1`.
 
 Then user uses __access token__ in header `Authorization: Bearer Token` for __films-app__.
 
@@ -93,6 +93,7 @@ Returns:
 * `35432` - port for postgres of __auth-db__.
 * `45432` - port for postgres of __films-db__.
 
+DB user is `root`, password is `secret`.
 
 ## License
 
