@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  auth-app:
+    build:
+      context: ./auth-app
+    volumes:
+    - ./auth-app:/var/www/auth-app
+    working_dir: /var/www/auth-app
+  auth-nginx:
+    build:
+      context: ./auth-nginx
+    volumes:
+    - ./auth-app/public:/var/www/auth-app/public
+  auth-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret

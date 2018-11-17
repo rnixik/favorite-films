@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  auth-app:
+    environment:
+      XDEBUG_CONFIG: remote_host=192.168.1.232 # your ip
+    volumes:
+      - ./auth-app/php_dev.ini:/usr/local/etc/php/php.ini
+  auth-nginx:
+    build:
+      args:
+        WEB_USER_ID: 1000 # result of `id -u`
+        WEB_USER_NAME: developer
+    ports:
+      - 8001:80
+  auth-db:
+    ports:
+      - 35432:5432

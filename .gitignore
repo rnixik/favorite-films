@@ -1,0 +1,6 @@
+nbproject
+.idea
+
+.env
+docker-compose.override.yml
+user_id.txt
