@@ -15,3 +15,18 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: secret
+  films-app:
+    build:
+      context: ./films-app
+    volumes:
+    - ./films-app:/var/www/films-app
+    working_dir: /var/www/films-app
+  films-nginx:
+    build:
+      context: ./films-nginx
+    volumes:
+    - ./films-app/public:/var/www/films-app/public
+  films-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret
