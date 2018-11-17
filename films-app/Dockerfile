@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-stretch
+FROM php:7.2.12-fpm-stretch
 
 RUN apt-get update
 

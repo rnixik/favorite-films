@@ -60,6 +60,10 @@ You need `client_id` and `client_secret`. It can be found:
 * As output of command `docker-compose exec auth-app php artisan passport:client --password --no-interaction`
 * In table `oauth_clients` of auth-db
 
+Also you need email (as `username`) and `password` for a user. 
+Email can be found in table `users` of `auth-db`.
+Password is `secret1` for every seed.
+
 Then user uses __access token__ in header `Authorization: Bearer Token` for __films-app__.
 
 __films-app__ requests __auth-app__ by API with this token to get info about user.

@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:1.15.6
 
 ARG WEB_USER_ID=33
 ARG WEB_USER_NAME=www-data
