@@ -15,3 +15,6 @@ services:
   auth-db:
     ports:
       - 35432:5432
+  swagger:
+    ports:
+    - 8003:8080

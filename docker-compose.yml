@@ -30,3 +30,9 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: secret
+  swagger:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./swagger:/var/www/swagger
+    environment:
+      SWAGGER_JSON: /var/www/swagger/swagger.json

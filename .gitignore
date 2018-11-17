@@ -3,3 +3,6 @@ nbproject
 
 .env
 docker-compose.override.yml
+
+# a bug with local filesystem
+swagger.json___jb_old___
