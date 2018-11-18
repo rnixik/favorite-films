@@ -93,7 +93,7 @@ Returns:
 * `35432` - port for postgres of __auth-db__.
 * `45432` - port for postgres of __films-db__.
 
-DB user is `root`, password is `secret`.
+DB user is `postgres`, password is `secret`.
 
 ## License
 
